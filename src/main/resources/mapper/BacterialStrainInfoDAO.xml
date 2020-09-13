@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wzh.dao.BacterialStrainInfoDao">
+    <resultMap id="BaseResultMap" type="cn.wzh.entity.BacterialStrainInfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="sampleInfoId" column="sample_info_id" jdbcType="INTEGER"/>
+        <result property="sampleNum" column="sample_num" jdbcType="VARCHAR"/>
+        <result property="originalNum" column="original_num" jdbcType="VARCHAR"/>
+        <result property="wordAddr" column="word_addr" jdbcType="VARCHAR"/>
+        <result property="txtAddr" column="txt_addr" jdbcType="VARCHAR"/>
+        <result property="pictureAddr" column="picture_addr" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="isdel" column="isdel" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    bacterial_strain_info.id as bacterial_strain_info_id, bacterial_strain_info.sample_info_id as bacterial_strain_info_sample_info_id, 
+    bacterial_strain_info.sample_num as bacterial_strain_info_sample_num, bacterial_strain_info.original_num as bacterial_strain_info_original_num, 
+    bacterial_strain_info.word_addr as bacterial_strain_info_word_addr, bacterial_strain_info.txt_addr as bacterial_strain_info_txt_addr, 
+    bacterial_strain_info.picture_addr as bacterial_strain_info_picture_addr, bacterial_strain_info.create_time as bacterial_strain_info_create_time, 
+    bacterial_strain_info.isdel as bacterial_strain_info_isdel
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bacterial_strain_info bacterial_strain_info
+        where bacterial_strain_info.id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bacterial_strain_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.wzh.entity.BacterialStrainInfo"
+            useGeneratedKeys="true">
+    insert into bacterial_strain_info (sample_info_id, sample_num, original_num, 
+      word_addr, txt_addr, picture_addr, 
+      create_time, isdel)
+    values (#{sampleInfoId,jdbcType=INTEGER}, #{sampleNum,jdbcType=VARCHAR}, #{originalNum,jdbcType=VARCHAR}, 
+      #{wordAddr,jdbcType=VARCHAR}, #{txtAddr,jdbcType=VARCHAR}, #{pictureAddr,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{isdel,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.wzh.entity.BacterialStrainInfo"
+            useGeneratedKeys="true">
+        insert into bacterial_strain_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="sampleInfoId != null">
+                sample_info_id,
+            </if>
+            <if test="sampleNum != null">
+                sample_num,
+            </if>
+            <if test="originalNum != null">
+                original_num,
+            </if>
+            <if test="wordAddr != null">
+                word_addr,
+            </if>
+            <if test="txtAddr != null">
+                txt_addr,
+            </if>
+            <if test="pictureAddr != null">
+                picture_addr,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="isdel != null">
+                isdel,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="sampleInfoId != null">
+                #{sampleInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="sampleNum != null">
+                #{sampleNum,jdbcType=VARCHAR},
+            </if>
+            <if test="originalNum != null">
+                #{originalNum,jdbcType=VARCHAR},
+            </if>
+            <if test="wordAddr != null">
+                #{wordAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="txtAddr != null">
+                #{txtAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="pictureAddr != null">
+                #{pictureAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isdel != null">
+                #{isdel,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.wzh.entity.BacterialStrainInfo">
+        update bacterial_strain_info
+        <set>
+            <if test="sampleInfoId != null">
+                sample_info_id = #{sampleInfoId,jdbcType=INTEGER},
+            </if>
+            <if test="sampleNum != null">
+                sample_num = #{sampleNum,jdbcType=VARCHAR},
+            </if>
+            <if test="originalNum != null">
+                original_num = #{originalNum,jdbcType=VARCHAR},
+            </if>
+            <if test="wordAddr != null">
+                word_addr = #{wordAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="txtAddr != null">
+                txt_addr = #{txtAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="pictureAddr != null">
+                picture_addr = #{pictureAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isdel != null">
+                isdel = #{isdel,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.wzh.entity.BacterialStrainInfo">
+    update bacterial_strain_info
+    set sample_info_id = #{sampleInfoId,jdbcType=INTEGER},
+      sample_num = #{sampleNum,jdbcType=VARCHAR},
+      original_num = #{originalNum,jdbcType=VARCHAR},
+      word_addr = #{wordAddr,jdbcType=VARCHAR},
+      txt_addr = #{txtAddr,jdbcType=VARCHAR},
+      picture_addr = #{pictureAddr,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      isdel = #{isdel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+    <insert id="insertList">
+        insert into bacterial_strain_info (sample_info_id, sample_num, original_num,
+        word_addr, txt_addr, picture_addr,
+        create_time, isdel)
+        values
+        <foreach collection="bacterialStrainInfoList" separator="," item="bacterialStrainInfo">
+            (#{bacterialStrainInfo.sample_info_id,jdbcType=INTEGER},
+            #{bacterialStrainInfo.sample_num,jdbcType=VARCHAR},
+            #{bacterialStrainInfo.original_num,jdbcType=VARCHAR},
+            #{bacterialStrainInfo.word_addr,jdbcType=VARCHAR},
+            #{bacterialStrainInfo.txt_addr,jdbcType=VARCHAR},
+            #{bacterialStrainInfo.picture_addr,jdbcType=VARCHAR},
+            now(), 0)
+        </foreach>
+    </insert>
+</mapper>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wzh.dao.SampleToxinDAO">
+    <resultMap id="BaseResultMap" type="cn.wzh.entity.SampleToxin">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="toxinId" column="toxin_id" jdbcType="INTEGER"/>
+        <result property="toxinCount" column="toxin_count" jdbcType="OTHER"/>
+        <result property="sampleInfoId" column="sample_info_id" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    sample_toxin.id as sample_toxin_id, sample_toxin.toxin_id as sample_toxin_toxin_id, 
+    sample_toxin.toxin_count as sample_toxin_toxin_count, sample_toxin.sample_info_id as sample_toxin_sample_info_id
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sample_toxin sample_toxin
+        where sample_toxin.id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sample_toxin
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.wzh.entity.SampleToxin"
+            useGeneratedKeys="true">
+    insert into sample_toxin (toxin_id, toxin_count, sample_info_id
+      )
+    values (#{toxinId,jdbcType=INTEGER}, #{toxinCount,jdbcType=REAL}, #{sampleInfoId,jdbcType=INTEGER}
+      )
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.wzh.entity.SampleToxin"
+            useGeneratedKeys="true">
+        insert into sample_toxin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="toxinId != null">
+                toxin_id,
+            </if>
+            <if test="toxinCount != null">
+                toxin_count,
+            </if>
+            <if test="sampleInfoId != null">
+                sample_info_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="toxinId != null">
+                #{toxinId,jdbcType=INTEGER},
+            </if>
+            <if test="toxinCount != null">
+                #{toxinCount,jdbcType=REAL},
+            </if>
+            <if test="sampleInfoId != null">
+                #{sampleInfoId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.wzh.entity.SampleToxin">
+        update sample_toxin
+        <set>
+            <if test="toxinId != null">
+                toxin_id = #{toxinId,jdbcType=INTEGER},
+            </if>
+            <if test="toxinCount != null">
+                toxin_count = #{toxinCount,jdbcType=REAL},
+            </if>
+            <if test="sampleInfoId != null">
+                sample_info_id = #{sampleInfoId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.wzh.entity.SampleToxin">
+    update sample_toxin
+    set toxin_id = #{toxinId,jdbcType=INTEGER},
+      toxin_count = #{toxinCount,jdbcType=REAL},
+      sample_info_id = #{sampleInfoId,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <insert id="insertList" parameterType="list">
+        insert into sample_toxin (id, toxin_id, toxin_count, sample_info_id)
+        values
+        <foreach collection="sampleToxinList" item="sampleToxin" separator=",">
+            (#{sampleToxin.id,jdbcType=INTEGER}, #{sampleToxin.toxinId,jdbcType=INTEGER},
+            #{sampleToxin.toxinCount,jdbcType=REAL},
+            #{sampleToxin.sampleInfoId,jdbcType=INTEGER})
+        </foreach>
+    </insert>
+
+</mapper>

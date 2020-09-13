@@ -1,0 +1,1778 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>编辑信息</title>
+    <link href="../static/css/reset.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/editIM.css" rel="stylesheet" type="text/css"/>
+    <link href="../static/css/calendar.css" rel="stylesheet"/>
+
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/calendar.js" type="text/javascript"></script>
+    <script src="../static/js/editIM.js"></script>
+    <script src="../static/js/checkUpdateIM.js"></script>
+    <script charset="utf-8" src="../static/js/checkUserUpdateForm.js" type="text/javascript"></script>
+    <style>
+        html, body {
+            height: 100%
+        }
+    </style>
+
+</head>
+<body>
+<div class="contaner">
+
+    <div class="im-content">
+        <div class="im-heade">
+            <div class="imhead-title">当前页面：<a>新增信息</a></div>
+        </div>
+        <form accept-charset="utf-8" action="rest/addinformation" enctype="multipart/form-data" id="search_form"
+              method="post">
+            <div class="editim-table">
+
+                <ul class="table-con">
+                    <li class="edittable-top">
+                        <div class="edittable-left">采样信息</div>
+                        <div class="edittable-right">
+                            <ul>
+
+                                <li>
+                                    <lable>样品编号</lable>
+                                    <input class="ypbh" id="" maxlength="15" name="sampleId" onblur="checksample_id()"
+                                           placeholder="首字母英文，长度为5-15位" type="" value="">
+
+                                </li>
+
+                                <li>
+                                    <lable>农产品加工原料类别</lable>
+                                    <select class="sel" id="cptype" name="cropCategoryId" onchange="cptypes()">
+                                        <option value="0">请选择</option>
+
+                                        <option value="1">水果类</option>
+
+                                        <option value="2">谷物类</option>
+
+                                        <option value="3">油料类</option>
+
+                                        <option value="4">坚果类</option>
+
+                                        <option value="5">香辛类</option>
+
+                                        <option value="6">饲料类</option>
+
+                                        <option value="7">鸡</option>
+
+                                    </select>
+                                    <span id="crop_category_id"></span>
+                                </li>
+                                <li>
+                                    <lable>品种</lable>
+                                    <select class="sel" id="cptypess" name="breed">
+                                        <option class="cpzl" value="">请选择</option>
+                                    </select>
+                                    <span id="breed"></span>
+                                </li>
+
+                                <li>
+                                    <div class="width">
+                                        <lable>地点</lable>
+                                        <input id="shengs" type="hidden" value="北京">
+                                        <input id="shisss" type="hidden" value="北京市">
+                                        <input id="xiansss" type="hidden" value="东城区">
+
+                                        <input id="city" name="city" type="hidden" value="北京市">
+                                        <input id="county" name="county" type="hidden" value="东城区">
+                                        <input id="wsx" type="hidden" value="123">
+                                        <select class="province" id="shen"
+                                                onchange="changeShen(this.value,'shen','shi','xian')">
+
+
+                                            <option class="shengde" selected="selected" value="110000">北京</option>
+                                            <option class="shengde" value="120000">天津</option>
+                                            <option class="shengde" value="130000">河北</option>
+                                            <option class="shengde" value="140000">山西</option>
+                                            <option class="shengde" value="150000">内蒙古</option>
+                                            <option class="shengde" value="210000">辽宁</option>
+                                            <option class="shengde" value="220000">吉林</option>
+                                            <option class="shengde" value="230000">黑龙江</option>
+                                            <option class="shengde" value="310000">上海</option>
+                                            <option class="shengde" value="320000">江苏</option>
+                                            <option class="shengde" value="330000">浙江</option>
+                                            <option class="shengde" value="340000">安徽</option>
+                                            <option class="shengde" value="350000">福建</option>
+                                            <option class="shengde" value="360000">江西</option>
+                                            <option class="shengde" value="370000">山东</option>
+                                            <option class="shengde" value="410000">河南</option>
+                                            <option class="shengde" value="420000">湖北</option>
+                                            <option class="shengde" value="430000">湖南</option>
+                                            <option class="shengde" value="440000">广东</option>
+                                            <option class="shengde" value="450000">广西</option>
+                                            <option class="shengde" value="460000">海南</option>
+                                            <option class="shengde" value="500000">重庆</option>
+                                            <option class="shengde" value="510000">四川</option>
+                                            <option class="shengde" value="520000">贵州</option>
+                                            <option class="shengde" value="530000">云南</option>
+                                            <option class="shengde" value="540000">西藏</option>
+                                            <option class="shengde" value="610000">陕西</option>
+                                            <option class="shengde" value="620000">甘肃</option>
+                                            <option class="shengde" value="630000">青海</option>
+                                            <option class="shengde" value="640000">宁夏</option>
+                                            <option class="shengde" value="650000">新疆</option>
+                                            <option class="shengde" value="710000">台湾</option>
+                                            <option class="shengde" value="810000">香港</option>
+                                            <option class="shengde" value="820000">澳门</option>
+                                        </select><span>省</span>
+                                        <select class="city" id="shi" onblur="checkprovince()"
+                                                onchange="changeShi(this.value,'shen','shi','xian')">
+                                            <option class="shide" value="0">请选择</option>
+                                            <option class="shide" selected="selected" value="110100">北京市</option>
+                                        </select><span>市</span>
+                                        <select class="county" id="xian" onblur="checkprovince()" onchange="xianwsx()">
+                                            <option class="xiande" value="0">请选择</option>
+                                            <option class="xiande" selected="selected" value="110101">东城区</option>
+                                            <option class="xiande" value="110102">西城区</option>
+                                            <option class="xiande" value="110103">崇文区</option>
+                                            <option class="xiande" value="110104">宣武区</option>
+                                            <option class="xiande" value="110105">朝阳区</option>
+                                            <option class="xiande" value="110106">丰台区</option>
+                                            <option class="xiande" value="110107">石景山区</option>
+                                            <option class="xiande" value="110108">海淀区</option>
+                                            <option class="xiande" value="110109">门头沟区</option>
+                                            <option class="xiande" value="110111">房山区</option>
+                                            <option class="xiande" value="110112">通州区</option>
+                                            <option class="xiande" value="110113">顺义区</option>
+                                            <option class="xiande" value="110114">昌平区</option>
+                                            <option class="xiande" value="110115">大兴区</option>
+                                            <option class="xiande" value="110116">怀柔区</option>
+                                            <option class="xiande" value="110117">平谷区</option>
+                                            <option class="xiande" value="110228">密云县</option>
+                                            <option class="xiande" value="110229">延庆县</option>
+                                        </select><span>县</span>
+                                    </div>
+                                    <span class="xc">
+											<input id="xiang" name="township" placeholder="可为空" type="text" value="">乡
+											<input id="cun" name="village" placeholder="可为空" type="text" value="">村
+											<input id="hu" name="household" placeholder="可为空" type="text"
+                                                   value=""><span>户</span>
+										</span>
+
+                                </li>
+
+                                <li>
+                                    <lable>收获时间</lable>
+                                    <input id="dt" name="harvest_Time" placeholder="选择日期" readonly="readonly" type=""
+                                           value="">
+                                    <div class="calendar calendar-modal calendar-d"
+                                         id="dd"
+                                         style="width: 280px; height: 330px; left: 549.65px; top: 351px; z-index: 999; display: none;">
+                                        <div class="calendar-inner" style="width: 280px;">
+                                            <div class="calendar-views">
+                                                <div class="view view-date" style="width: 280px;">
+                                                    <div class="calendar-hd"><a class="calendar-display"
+                                                                                data-calendar-display-date=""
+                                                                                href="javascript:">2018/<span
+                                                            class="m">3</span></a>
+                                                        <div class="calendar-arrow"><span class="prev"
+                                                                                          data-calendar-arrow-date=""
+                                                                                          title="上一月">&lt;</span><span
+                                                                class="next" data-calendar-arrow-date="" title="下一月">&gt;</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="calendar-ct" style="width: 280px; height: 280px;">
+                                                        <ol class="week">
+                                                            <li style="width:40px;height:40px;line-height:40px">日</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">一</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">二</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">三</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">四</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">五</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">六</li>
+                                                        </ol>
+                                                        <ul class="date-items">
+                                                            <li style="width: 280px;">
+                                                                <ol class="days">
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        29
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        30
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        31
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        8
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        9
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        10
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        11
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        12
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        13
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        14
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        15
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        16
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        17
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        18
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        19
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        20
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        21
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        22
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        23
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        24
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        8
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        9
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        10
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li style="width: 280px;">
+                                                                <ol class="days">
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        8
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        9
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        10
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        11
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        12
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        13
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        14
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        15
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        16
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        17
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        18
+                                                                    </li>
+                                                                    <li class=" now"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        19
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        20
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        21
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        22
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        23
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        24
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        29
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        30
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        31
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li style="width: 280px;">
+                                                                <ol class="days">
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        29
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        30
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        31
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        8
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        9
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        10
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        11
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        12
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        13
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        14
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        15
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        16
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        17
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        18
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        19
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        20
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        21
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        22
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        23
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        24
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        29
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        30
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="view view-month" style="width: 280px;">
+                                                    <div class="calendar-hd"><a class="calendar-display"
+                                                                                data-calendar-display-month=""
+                                                                                href="javascript:">2018</a>
+                                                        <div class="calendar-arrow"><span class="prev"
+                                                                                          data-calendar-arrow-month=""
+                                                                                          title="上一年">&lt;</span><span
+                                                                class="next" data-calendar-arrow-month="" title="下一年">&gt;</span>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="calendar-ct month-items"
+                                                        style="width: 280px; height: 280px;">
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">1月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">2月
+                                                        </li>
+                                                        <li class="now" data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">3月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">4月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">5月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">6月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">7月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">8月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">9月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">10月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">11月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">12月
+                                                        </li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-label"><p>HelloWorld</p><i></i></div>
+                                    </div>
+                                    <span class="err"></span>
+                                </li>
+                                <!-- onblur="checksampling_time()" -->
+                                <li>
+                                    <lable>取样时间</lable>
+                                    <input id="dt-b" name="sampling_Time" placeholder="选择日期" readonly="readonly"
+                                           type="" value="">
+                                    <div class="calendar calendar-modal calendar-d"
+                                         id="dd-b"
+                                         style="width: 280px; height: 330px; left: 549.65px; top: 393px; z-index: 999; display: none;">
+                                        <div class="calendar-inner" style="width: 280px;">
+                                            <div class="calendar-views">
+                                                <div class="view view-date" style="width: 280px;">
+                                                    <div class="calendar-hd"><a class="calendar-display"
+                                                                                data-calendar-display-date=""
+                                                                                href="javascript:">2018/<span
+                                                            class="m">3</span></a>
+                                                        <div class="calendar-arrow"><span class="prev"
+                                                                                          data-calendar-arrow-date=""
+                                                                                          title="上一月">&lt;</span><span
+                                                                class="next" data-calendar-arrow-date="" title="下一月">&gt;</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="calendar-ct" style="width: 280px; height: 280px;">
+                                                        <ol class="week">
+                                                            <li style="width:40px;height:40px;line-height:40px">日</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">一</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">二</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">三</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">四</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">五</li>
+                                                            <li style="width:40px;height:40px;line-height:40px">六</li>
+                                                        </ol>
+                                                        <ul class="date-items">
+                                                            <li style="width: 280px;">
+                                                                <ol class="days">
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        29
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        30
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        31
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        8
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        9
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        10
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        11
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        12
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        13
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        14
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        15
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        16
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        17
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        18
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        19
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        20
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        21
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        22
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        23
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        24
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        8
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        9
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        10
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li style="width: 280px;">
+                                                                <ol class="days">
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        8
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        9
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        10
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        11
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        12
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        13
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        14
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        15
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        16
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        17
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        18
+                                                                    </li>
+                                                                    <li class=" now"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        19
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        20
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        21
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        22
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        23
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        24
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        29
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        30
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        31
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                            <li style="width: 280px;">
+                                                                <ol class="days">
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        29
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        30
+                                                                    </li>
+                                                                    <li class="old"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        31
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        6
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        7
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        8
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        9
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        10
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        11
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        12
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        13
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        14
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        15
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        16
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        17
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        18
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        19
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        20
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        21
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        22
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        23
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        24
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        25
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        26
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        27
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        28
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        29
+                                                                    </li>
+                                                                    <li class=""
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        30
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        1
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        2
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        3
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        4
+                                                                    </li>
+                                                                    <li class="new"
+                                                                        data-calendar-day=""
+                                                                        style="width:40px;height:40px;line-height:40px">
+                                                                        5
+                                                                    </li>
+                                                                </ol>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="view view-month" style="width: 280px;">
+                                                    <div class="calendar-hd"><a class="calendar-display"
+                                                                                data-calendar-display-month=""
+                                                                                href="javascript:">2018</a>
+                                                        <div class="calendar-arrow"><span class="prev"
+                                                                                          data-calendar-arrow-month=""
+                                                                                          title="上一年">&lt;</span><span
+                                                                class="next" data-calendar-arrow-month="" title="下一年">&gt;</span>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="calendar-ct month-items"
+                                                        style="width: 280px; height: 280px;">
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">1月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">2月
+                                                        </li>
+                                                        <li class="now" data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">3月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">4月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">5月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">6月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">7月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">8月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">9月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">10月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">11月
+                                                        </li>
+                                                        <li data-calendar-month=""
+                                                            style="width:70px;height:70px;line-height:70px">12月
+                                                        </li>
+                                                    </ol>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="calendar-label"><p>HelloWorld</p><i></i></div>
+                                    </div>
+                                    <span class="err"></span>
+                                </li>
+
+                                <li>
+                                    <lable>取样人</lable>
+                                    <input id="" maxlength="15" name="samplingPeople" placeholder="请输入取样人姓名" type=""
+                                           value="">
+                                    <span id="sampling_people"></span>
+                                </li>
+                                <li class="jijie">
+                                    <lable>采集季节及气候特征</lable>
+                                    <textarea cols="" id="seasonal1" name="seasonal" rows=""></textarea>
+                                    <span id="seasonal"></span>
+                                </li>
+                                <li class="huanjing">
+                                    <lable>采集地、环境信息描述</lable>
+                                    <textarea cols="" id="description1" name="description" rows=""></textarea>
+                                    <span id="description"></span>
+                                </li>
+                                <li>
+                                    <lable>真菌污染率</lable>
+                                    <input id="" maxlength="5" name="pollutionRate" placeholder="不需要输入'%'" type=""
+                                           value="">
+                                    <span id="pollution_rate"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <div class="addds">
+                        <li class="edittable-middle">
+                            <div class="editmiddle-left">
+                                毒素信息
+                            </div>
+
+                            <div class="editmiddle-right">
+                                <ul>
+                                    <li>
+                                        <lable>毒素种类</lable>
+                                        <select id="toxin_id1" name="toxin_id">
+                                            <option value="0">请选择</option>
+
+                                            <option value="1">DON</option>
+
+                                            <option value="2">伏马菌素</option>
+
+                                            <option value="3">玉米赤霉烯酮</option>
+
+                                            <option value="4">黄曲霉毒素总量</option>
+
+                                            <option value="5">黄曲霉毒素B1</option>
+
+                                            <option value="6">黄曲霉毒素B2</option>
+
+                                            <option value="7">黄曲霉毒素G1</option>
+
+                                            <option value="8">黄曲霉毒素G2</option>
+
+                                            <option value="9">黄曲霉毒素M1</option>
+
+                                            <option value="10">黄曲霉毒素M2</option>
+
+                                            <option value="11">展青霉毒素</option>
+
+                                            <option value="12">赭曲霉毒素A</option>
+
+                                        </select>
+                                        <span id="toxin_id"></span>
+                                    </li>
+                                    <li>
+                                        <lable>毒素含量</lable>
+                                        <input maxlength="10" name="toxin_count" placeholder="毒素含量最大可输入十位" type="text">
+                                        <span id="toxin_count"></span>
+                                    </li>
+                                    <li>
+                                        <a class="del">删除</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </div>
+                    <div class="add-dsxx">+添加毒素信息</div>
+                    <div class="add-con">
+                    </div>
+                </ul>
+
+                <div class="add-ds add">+添加产毒菌株信息</div>
+                <div class="footer">
+                    <a class="baocun" onclick="sub()">保存</a>
+                    <!-- <a onclick="history.go(-1)" class="marginl">返回</a> -->
+                    <a class="marginl"
+                       href="javascript:if(confirm('确实要放弃操作吗?返回之后，所添加数据不会保存！'))location='/glory/rest/iddeleteyangpin?id=754'"
+                       onclick="history.go(-1)">返回</a>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+
+<script>
+    function excel() {
+
+    }
+
+    function sub() {
+        // 通过表单序列化获取表单数据
+        var formData = $("#search_form").serialize();
+        var formData2 = new FormData(formData);
+        console.log(formData2);
+
+        // 定义数组，用于保存数据
+        var listToxinId = new Array();
+        var listToxinCount = new Array();
+
+        // 通过循环找到所有name属性为toxin_id的select标签。index为当前下标，item为当前对象
+        $.each($("select[name=toxin_id]"), function (index, item) {
+            listToxinId.push($(item).val());
+        });
+        $.each($("input[name=toxin_count]"), function (index, item) {
+            listToxinCount.push($(item).val());
+        });
+
+        formData2.append("listToxinId", listToxinId);
+        formData2.append("listToxinCount", listToxinCount);
+
+        $.each($("input[name=word_addr]"), function (index, item) {
+            // append在添加值的时候不会把同名的值覆盖掉，而是在原值后面追加新值。
+            // 当前input框所存储的文件地址都存在files中，它允许同时有多个地址，因此它是个集合。因为我只上传一个文件，因此该集合中就一个地址，这个地址肯定处于第一位，因此下标设置为0，表示取第一位。
+            formData2.append("wordAddr", $(item).files[0]);
+        });
+        $.each($("input[name=txt_addr]"), function (index, item) {
+            formData2.append("txtAddr", $(item).files[0]);
+        });
+        $.each($("input[name=picture_addr]"), function (index, item) {
+            formData2.append("pictureAddr", $(item).files[0]);
+        });
+
+
+        $.ajax({
+            url: "/sampleInfo/add",
+            data: formData + "&listToxinId=" + listToxinId + "&listToxinCount=" + listToxinCount,
+            type: "post",
+            dataType: "json",
+            async: false,
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                alert(data);
+            }
+        });
+    }
+</script>
+</html>

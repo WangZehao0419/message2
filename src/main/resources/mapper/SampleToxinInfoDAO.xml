@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wzh.dao.SampleToxinInfoDAO">
+    <resultMap id="BaseResultMap" type="cn.wzh.entity.SampleToxinInfo">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="toxinType" column="toxin_type" jdbcType="VARCHAR"/>
+        <result property="state" column="state" jdbcType="INTEGER"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    sample_toxin_info.id as sample_toxin_info_id, sample_toxin_info.toxin_type as sample_toxin_info_toxin_type, 
+    sample_toxin_info.`state` as `sample_toxin_info_state`
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from sample_toxin_info sample_toxin_info
+        where sample_toxin_info.id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sample_toxin_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.wzh.entity.SampleToxinInfo"
+            useGeneratedKeys="true">
+    insert into sample_toxin_info (toxin_type, `state`)
+    values (#{toxinType,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER})
+  </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.wzh.entity.SampleToxinInfo"
+            useGeneratedKeys="true">
+        insert into sample_toxin_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="toxinType != null">
+                toxin_type,
+            </if>
+            <if test="state != null">
+                `state`,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="toxinType != null">
+                #{toxinType,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.wzh.entity.SampleToxinInfo">
+        update sample_toxin_info
+        <set>
+            <if test="toxinType != null">
+                toxin_type = #{toxinType,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                `state` = #{state,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.wzh.entity.SampleToxinInfo">
+    update sample_toxin_info
+    set toxin_type = #{toxinType,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+    select * from sample_toxin_info;
+  </select>
+</mapper>
